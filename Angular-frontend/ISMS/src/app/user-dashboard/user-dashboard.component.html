@@ -1,0 +1,51 @@
+<div class="spinner-container" *ngIf="isLoading; else dashboard">
+    <mat-spinner></mat-spinner>
+    <div class="loading-text">Loading...</div>
+</div>
+
+<ng-template #dashboard>
+    <mat-sidenav-container class="fullscreen">
+        <mat-sidenav #sidenav [mode]="(isSmallScreen | async) ? 'over' : 'side'" [opened]="!(isSmallScreen | async)">
+            <h2 class="sidenav-heading mat-h2 mb-3" *ngIf="!(isSmallScreen | async)"><mat-icon
+                    class="mr-6">dashboard</mat-icon>User Dashboard</h2>
+            <mat-nav-list class="sidenav-list">
+                <mat-list-item>
+                    <a matLine class="sidenav-link" routerLink="/user-dashboard/user-profile"
+                        routerLinkActive="active"><mat-icon class="mr-1">account_circle</mat-icon>Profile</a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a matLine routerLink="/user-dashboard/user-material" class="sidenav-link" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}"><mat-icon
+                            class="mr-1">cloud_download</mat-icon>download
+                        Material</a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a matLine routerLink="/user-dashboard/people" class="sidenav-link"
+                        routerLinkActive="active"><mat-icon class="mr-1">people</mat-icon>People</a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a matLine class="sidenav-link" routerLink="/user-dashboard/announcements"
+                        routerLinkActive="active"><mat-icon class="mr-1">announcements</mat-icon>Announcements</a>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="logout-btn-wrapper">
+                    <button mat-button color="warn" (click)="logout()" class="logout-btn">Logout</button>
+                </mat-list-item>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <mat-toolbar color="primary" class="mat-elevation-z3" *ngIf="(isSmallScreen | async)">
+                <button mat-icon-button class="hamburger-btn" (click)="sidenav.toggle()">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <span class="toolbar-title">User Dashboard</span>
+            </mat-toolbar>
+
+            <div class="sidenav-content">
+
+                <router-outlet></router-outlet>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</ng-template>

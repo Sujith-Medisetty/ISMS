@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Make Announcement</h2>
+<div mat-dialog-content>
+  <form [formGroup]="announcementForm">
+    <mat-form-field>
+      <mat-label>Announcement-Title</mat-label>
+      <input matInput placeholder="Title" formControlName="title">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Announcement-Description</mat-label>
+      <textarea matInput placeholder="Enter announcement" formControlName="announcementText"></textarea>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Close</button>
+  <button mat-button color="primary" (click)="onSubmit()" [disabled]="announcementForm.invalid">Submit</button>
+</div>

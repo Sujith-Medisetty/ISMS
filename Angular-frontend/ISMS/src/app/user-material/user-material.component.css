@@ -1,0 +1,21 @@
+mat-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  mat-toolbar span {
+    flex-grow: 1;
+    text-align: left;
+  }
+  
+  mat-toolbar button {
+    margin-left: auto;
+  }
+
+  .security-code-input {
+    text-align: center;
+  }
+  
+  
+  

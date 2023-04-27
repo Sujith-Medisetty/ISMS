@@ -1,0 +1,49 @@
+<mat-toolbar color="primary" class="toolbar">
+  <span class="project-name"><mat-icon style="margin-right: 10px;font-size: 25px;">security</mat-icon>Information Security Management System</span>
+  <div class="spacer"></div>
+  <button mat-raised-button color="accent" class="user-button" (click)="showUserForm()" class="button-format">User Login</button>
+  <button mat-raised-button color="accent" class="admin-button" (click)="showAdminForm()" class="button-format">Admin Login</button>
+</mat-toolbar>
+<body>
+  <div class="login-container">
+    <div class="login-form user" *ngIf="isUserFormVisible===true">
+      <h2>User Login</h2>
+      <form [formGroup]="userLoginForm" (ngSubmit)="onUserSubmit()">
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" placeholder="Enter your email" formControlName="email" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Enter your password" formControlName="password" required>
+        </mat-form-field>
+        <ngx-recaptcha2 #userCaptchaElemLogin [siteKey]="siteKey" formControlName="recaptcha" required></ngx-recaptcha2>
+        <div class="button-container">
+          <button mat-raised-button color="primary" type="submit">Login</button>
+        </div>
+      </form>
+    </div>
+    <div class="login-form admin" *ngIf="isAdminFormVisible===true">
+      <h2>Admin Login</h2>
+      <form [formGroup]="adminLoginForm" (ngSubmit)="onAdminSubmit()">
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" placeholder="Enter your email" formControlName="email" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Enter your password" formControlName="password" required>
+        </mat-form-field>
+        <ngx-recaptcha2 #adminCaptchaElemLogin [siteKey]="siteKey" formControlName="recaptcha" required></ngx-recaptcha2>
+        <div class="button-container">
+          <button mat-raised-button color="primary" type="submit">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="register-container">
+    <p class="register-link" (click)="openRegisterDialog()"> Don't have an user account? <span>Register now</span>
+    </p>
+  </div>
+</body>
+

@@ -1,0 +1,117 @@
+<mat-toolbar color="cool" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+  <mat-card>
+    <mat-card-content style="font-size: 13px;">
+      <div class="container">
+        <div>
+          <span class="highlight">Backend-Server-Status : </span><span>{{appNavbarHealth["status"]}}</span>
+        </div>
+        <div>
+          <span class="highlight">DB-Status : </span><span>{{appNavbarHealth["components"]["db"]["status"]}}</span>
+        </div>
+        <div>
+          <span class="highlight">Database : </span><span>{{appNavbarHealth["components"]["db"]["details"]["database"]}}</span>
+        </div>
+        <div>
+          <span class="highlight">Total-Diskspace : </span><span>{{appNavbarHealth["components"]["diskSpace"]["details"]["total"]}}</span>
+        </div>
+        <div>
+          <span class="highlight">Free-Diskspace : </span><span>{{appNavbarHealth["components"]["diskSpace"]["details"]["free"]}}</span>
+        </div>
+        <div>
+          <span class="highlight">Disk-Path : </span><span>{{appNavbarHealth["components"]["diskSpace"]["details"]["path"]}}</span>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</mat-toolbar>
+
+<div *ngIf="dataAvailable">
+  <div *ngFor="let status of statusArray" style="display: inline-block;margin: 20px;width: 300px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+    <mat-card [style.background-color]="getStatusColor(+getObjectKeys(status))"
+      [style.opacity]="getStatusColor(+getObjectKeys(status)) ? 0.85 : 1">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>{{getStatusIcon(+getObjectKeys(status))}}</mat-icon>
+          {{getObjectKeys(status)}} Response
+          <span class="count" style="margin-left: 40px;font-size: 30px;">{{status[getObjectKeys(status)[0]]}}</span>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Updated last: {{getLastUpdated()}}</p>
+        <!-- Additional content here -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<div style="margin: 20px;">
+  <canvas baseChart [type]="'pie'" [datasets]="pieChartDatasets" [labels]="pieChartLabels" [options]="pieChartOptions"
+    [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+  </canvas>
+</div>
+
+
+
+<div style="overflow-x: auto;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+
+  <table mat-table [dataSource]="appHealth" class="mat-elevation-z8">
+
+    <!-- Doc-Name Column -->
+    <ng-container matColumnDef="uri">
+      <th mat-header-cell *matHeaderCellDef> URI (HttpRequest) </th>
+      <td mat-cell *matCellDef="let element"> {{element['request']['uri']}} </td>
+    </ng-container>
+
+    <!-- Doc-Name Column -->
+    <ng-container matColumnDef="method">
+      <th mat-header-cell *matHeaderCellDef> method (HttpRequest) </th>
+      <td mat-cell *matCellDef="let element"> {{element['request']['method']}} </td>
+    </ng-container>
+    <!-- description Column -->
+    <ng-container matColumnDef="origin">
+      <th mat-header-cell *matHeaderCellDef> origin(HttpRequest) </th>
+      <td mat-cell *matCellDef="let element"> {{element['request']['headers']['origin']}} </td>
+    </ng-container>
+
+    <!-- Doc-Name Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> status (HttpResponse)</th>
+      <td mat-cell *matCellDef="let element" [ngClass]="{
+                'green': element['response']['status'] === 200,
+                'warn': element['response']['status'] >= 400 && element['response']['status'] < 500,
+                'red': element['response']['status'] === 500
+              }"> {{element['response']['status']}} </td>
+    </ng-container>
+
+    <!-- Doc-Name Column -->
+    <ng-container matColumnDef="Content-Type">
+      <th mat-header-cell *matHeaderCellDef> Content-type (HttpResponse)</th>
+      <td mat-cell *matCellDef="let element"> {{element['response']['headers']['Content-Type']}} </td>
+    </ng-container>
+
+    <!-- Doc-Name Column -->
+    <ng-container matColumnDef="Date">
+      <th mat-header-cell *matHeaderCellDef> Date (HttpResponse)</th>
+      <td mat-cell *matCellDef="let element"> {{element['response']['headers']['Date']}} </td>
+    </ng-container>
+
+    <!-- Doc-Name Column -->
+    <ng-container matColumnDef="timeTaken">
+      <th mat-header-cell *matHeaderCellDef> timeTaken (HttpResponse)</th>
+      <td mat-cell *matCellDef="let element"> {{element['timeTaken']}} </td>
+    </ng-container>
+
+    <!-- show no new User requests -->
+    <ng-container matColumnDef="noData">
+      <mat-footer-cell *matFooterCellDef>
+        No New User Requests..!
+      </mat-footer-cell>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <!-- <tr mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':nullDisplay}"></tr> -->
+  </table>
+</div>
+<mat-paginator [pageSize]="50" [pageSizeOptions]="[5, 10, 25, 50, 100, 500]" aria-label="Select page">
+</mat-paginator>

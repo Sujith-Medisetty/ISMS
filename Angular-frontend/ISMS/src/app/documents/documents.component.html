@@ -1,0 +1,40 @@
+<mat-toolbar color="primary">
+    <button mat-raised-button color="accent" (click)="openUploadDialog()"><mat-icon>add</mat-icon>Add Material</button>
+</mat-toolbar>
+<div>
+    <table mat-table [dataSource]="allMaterials" class="mat-elevation-z8">
+        <!-- Doc-Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> DOC-NAME </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <!-- description Column -->
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> DOC-DESCRIPTION </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <!-- action buttons column -->
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> ACTIONS </th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;">
+                <!-- <button mat-button color="primary" (click)="modifyDocument(element)">Edit</button> -->
+                <button mat-button color="warn" (click)="deleteDocument(element)">Delete</button>
+                <button mat-button style="color:green" (click)="downloadDocument(element)">Download</button>
+            </td>
+        </ng-container>
+
+        <!-- show no new User requests -->
+        <ng-container matColumnDef="noData">
+            <mat-footer-cell *matFooterCellDef>
+                No New User Requests..!
+            </mat-footer-cell>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <!-- <tr mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':nullDisplay}"></tr> -->
+    </table>
+</div>
+<mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10]" aria-label="Select page">
+</mat-paginator>

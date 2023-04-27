@@ -1,0 +1,45 @@
+.green{
+    color:green;
+    font-weight: bold;
+}
+
+.red{
+    color:red;
+    font-weight: bold;
+}
+
+.orange{
+    color:orange;
+    font-weight: bold;
+}
+
+.blue{
+    color: blue;
+    font-weight: bold;
+}
+
+mat-card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .count {
+    font-weight: bold;
+    margin-left: 10px;
+  }
+
+  .container {
+    display: flex;
+  }
+  .container div {
+    display: inline-block;
+    margin-inline: 10px;
+  }
+
+  .highlight{
+    font-weight: bold;
+    color: orange;
+  }
+  
+  

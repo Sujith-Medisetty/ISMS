@@ -1,0 +1,78 @@
+<mat-toolbar color="primary" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+    <mat-icon style="margin-right: 10px;">download</mat-icon><span>{{"User-material-Download-approval-requests"|uppercase}}</span>
+</mat-toolbar>
+
+<table mat-table [dataSource]="approvalRequests" class="mat-elevation-z8"
+    style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+    <!-- username Column -->
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> USER-ID </th>
+        <td mat-cell *matCellDef="let element">{{element.id}} </td>
+    </ng-container>
+
+    <!-- nickname Column -->
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> USER-EMAIL </th>
+        <td mat-cell *matCellDef="let element"> {{element.email | uppercase}} </td>
+    </ng-container>
+
+    <!-- TimeStamp Column -->
+    <ng-container matColumnDef="requestedDateTime">
+        <th mat-header-cell *matHeaderCellDef> REQUESTED TIMESTAMP </th>
+        <td mat-cell *matCellDef="let element"> {{element.requestedDateTime | date:'medium'}} </td>
+    </ng-container>
+
+    <!-- action buttons column -->
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> ACTIONS </th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-button color="primary" (click)="approveRequest(element)">Approve</button>
+            <button mat-button color="warn" (click)="rejectRequest(element)">Reject</button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10]" aria-label="Select page">
+</mat-paginator>
+
+<div style="margin: 100px;"></div>
+
+
+<mat-toolbar color="primary" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+    <mat-icon style="margin-right: 10px;">key</mat-icon><span>{{"User-material-Download-approved-requests"|uppercase}}</span>
+</mat-toolbar>
+<table mat-table [dataSource]="approvedRequests" class="mat-elevation-z8"
+    style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+    <!-- username Column -->
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> USER-ID </th>
+        <td mat-cell *matCellDef="let element">{{element.id}} </td>
+    </ng-container>
+
+    <!-- nickname Column -->
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> USER-EMAIL </th>
+        <td mat-cell *matCellDef="let element"> {{element.email | uppercase}} </td>
+    </ng-container>
+
+    <!-- TimeStamp Column -->
+    <ng-container matColumnDef="approvedDateTime">
+        <th mat-header-cell *matHeaderCellDef> APPROVED TIMESTAMP </th>
+        <td mat-cell *matCellDef="let element"> {{element.approvedDateTime | date:'medium'}} </td>
+    </ng-container>
+
+    <!-- action buttons column -->
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> ACTIONS </th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-button color="warn" (click)="rejectRequest(element)">Reject</button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+</table>
+<mat-paginator #paginator2 [pageSize]="5" [pageSizeOptions]="[5, 10]" aria-label="Select page">
+</mat-paginator>

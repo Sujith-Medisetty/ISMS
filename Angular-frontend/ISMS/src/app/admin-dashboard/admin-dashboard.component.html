@@ -1,0 +1,95 @@
+<div class="spinner-container" *ngIf="isLoading; else dashboard">
+    <mat-spinner></mat-spinner>
+    <div class="loading-text">Loading...</div>
+</div>
+
+<ng-template #dashboard>
+    <mat-sidenav-container class="fullscreen">
+        <mat-sidenav #sidenav [mode]="(isSmallScreen | async) ? 'over' : 'side'" [opened]="!(isSmallScreen | async)">
+            <h2 class="sidenav-heading mat-h2 mb-3" *ngIf="!(isSmallScreen | async)"><mat-icon
+                    class="mr-6">dashboard</mat-icon>Admin Dashboard</h2>
+            <mat-nav-list class="sidenav-list">
+                <mat-list-item>
+                    <a matLine class="sidenav-link" routerLink="/admin-dashboard/admin-profile" routerLinkActive="active"><mat-icon
+                            class="mr-1">account_circle</mat-icon>Profile</a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a matLine routerLink="/admin-dashboard/user-registration-requests" routerLinkActive="active"
+                        class="sidenav-link"><mat-icon class="mr-1">check_circle</mat-icon>Activation
+                        Requests</a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a matLine routerLink="/admin-dashboard/upload-material" class="sidenav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><mat-icon class="mr-1">cloud_upload</mat-icon>Upload
+                        Material</a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a matLine routerLink="/admin-dashboard/people" class="sidenav-link"
+                    routerLinkActive="active"><mat-icon class="mr-1">people</mat-icon>People</a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a matLine class="sidenav-link" routerLink="/admin-dashboard/App-Health"
+                    routerLinkActive="active"><mat-icon
+                            class="mr-1">health_and_safety</mat-icon>Application-Health</a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a matLine class="sidenav-link" routerLink="/admin-dashboard/announcements"
+                    routerLinkActive="active"><mat-icon
+                            class="mr-1">announcements-history</mat-icon>Announcements-History</a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a matLine class="sidenav-link" routerLink="/admin-dashboard/download-approval-requests" routerLinkActive="active"><mat-icon
+                            class="mr-1">download</mat-icon>User-Download-Requests</a>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="logout-btn-wrapper">
+                    <button mat-button color="warn" (click)="logout()" class="logout-btn">Logout</button>
+                </mat-list-item>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <mat-toolbar color="primary" class="mat-elevation-z3" *ngIf="(isSmallScreen | async)">
+                <button mat-icon-button class="hamburger-btn" (click)="sidenav.toggle()">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <span class="toolbar-title">Admin Dashboard</span>
+            </mat-toolbar>
+
+            <div class="sidenav-content">
+
+                <!-- Your page content goes here -->
+                <!-- in your component's template, use the mat-table component -->
+
+
+
+                <!-- loop through the object's properties and display the data -->
+                <!-- in your component's template, use the table element with Bootstrap classes and add CSS styles -->
+                <!-- in your component's template, use the table element with Bootstrap classes and add CSS styles -->
+                <!-- <table class="table table-bordered table-hover" style="cursor: pointer;">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col" class="border-0">USER-NAME</th>
+        <th scope="col" class="border-0">{{adminProfile.email | uppercase}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>NICK-NAME</td>
+        <td>{{adminProfile.name | uppercase}}</td>
+        <td><a href="#" class="text-danger font-weight-bold">EDIT</a></td>
+      </tr>
+      <tr>
+        <td colspan="3"><a href="#" class="text-danger font-weight-bold">Change Password..!</a></td>
+      </tr>
+    </tbody>
+  </table> -->
+
+                <router-outlet></router-outlet>
+
+
+
+
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</ng-template>
