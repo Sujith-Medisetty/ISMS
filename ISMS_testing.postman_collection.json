@@ -1,0 +1,429 @@
+{
+	"info": {
+		"_postman_id": "c5b0698f-b9d3-493f-895a-59583cb8273d",
+		"name": "ISMS_testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16111059"
+	},
+	"item": [
+		{
+			"name": "https://localhost:8080/auth/register",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// user registration request\r\n{\r\n    \"name\":\"Shaym\",\r\n    \"email\":\"shaym@gmail.com\",\r\n    \"password\":\"@Sujith6303\",\r\n    \"role\":\"ROLE_USER\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8080/auth/register",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:8080/auth/authenticate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// login endpoint\r\n// login with valid credentials and a cookie in the browser which is http secure and http only\r\n{\r\n    \"email\":\"sujith@gmail.com\",\r\n    \"password\":\"@Sujith6303\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8080/auth/authenticate",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:8080/ISMS/logout",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// only logged in user/admin can logout status is 200\r\n// we have logged as admin and if we want to see the admin jwt token pls see the cookie with jwt token in the header section.",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8080/ISMS/logout",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ISMS",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:8080/ISMS/adminProfile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// only logged in admin can get the admin profile\r\n// we have logged as admin and if we want to see the admin jwt token pls see the cookie with jwt token in the header section.",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8080/ISMS/adminProfile",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ISMS",
+						"adminProfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:8080/ISMS/getAllRequests",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// all the request that admin got to activate the user accounts",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8080/ISMS/getAllRequests",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ISMS",
+						"getAllRequests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:8080/ISMS/AllMaterials",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// we have logged as admin and if we want to see the admin jwt token pls see the cookie with jwt token in the header section.",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8080/ISMS/AllMaterials",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ISMS",
+						"AllMaterials"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:8080/ISMS/AllPeople",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// with out admin login no one can make announcement..! ensures authorization/.. status is 403\r\n// we have logged as admin and if we want to see the admin jwt token pls see the cookie with jwt token in the header section.\r\n[{\r\n    \"email\":\"ram@gmail.com\",\r\n     \"userId\":\"173\",\r\n      \"announcementTitle\":\"Alert..!\",\r\n       \"announcementText\":\"Make sure that u submit u r assignment by EOD\"\r\n}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8080/ISMS/MakeAnnouncement",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ISMS",
+						"MakeAnnouncement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:8080/ISMS/pendingMaterialApprovalRequests",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// no pendingMaterialApprovalRequests as of now status 200\r\n// we have logged as admin and if we want to see the admin jwt token pls see the cookie with jwt token in the header section."
+				},
+				"url": {
+					"raw": "https://localhost:8080/ISMS/pendingMaterialApprovalRequests",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ISMS",
+						"pendingMaterialApprovalRequests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:8080/ISMS/AcceptUserRegistrationRequest",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// now we logged as admin in post man.. so we can accept the user registration request based on the user object. status 200\r\n// we have logged as admin and if we want to see the admin jwt token pls see the cookie with jwt token in the header section.\r\n{\r\n    \"name\":\"Shaym\",\r\n    \"email\":\"shaym@gmail.com\",\r\n    \"password\":\"@Sujith6303\",\r\n    \"role\":\"ROLE_USER\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8080/ISMS/AcceptUserRegistrationRequest",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ISMS",
+						"AcceptUserRegistrationRequest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:8080/ISMS/RejectUserRegistrationRequest",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// user has been deleted successfulyy by the admin .. status is 200 \r\n// we have logged as admin and if we want to see the admin jwt token pls see the cookie with jwt token in the header section.\r\n{\r\n    \"name\":\"Shaym\",\r\n    \"email\":\"shaym@gmail.com\",\r\n    \"password\":\"@Sujith6303\",\r\n    \"role\":\"ROLE_USER\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8080/ISMS/RejectUserRegistrationRequest",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ISMS",
+						"RejectUserRegistrationRequest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:8080/ISMS/AllPeople",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// can see all people.. this end point can be accessed by both admin and users..  status 200\r\n// we have logged as user and if we want to see the admin jwt token pls see the cookie with jwt token in the header section.\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8080/ISMS/AllPeople",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ISMS",
+						"AllPeople"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:8080/ISMS/MakeAnnouncement",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// logged in as user and trying to make announcement in this case.. got status 403..\r\n{\r\n    \"email\":\"ram@gmail.com\",\r\n     \"userId\":\"173\",\r\n      \"announcementTitle\":\"Alert..!\",\r\n       \"announcementText\":\"Make sure that u submit u r assignment by EOD\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8080/ISMS/MakeAnnouncement",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ISMS",
+						"MakeAnnouncement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:8080/ISMS/AllAnnouncements",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// got all announcements made by admin.. this end point is only accessible to admin.. got status 200\r\n// we have logged as admin and if we want to see the admin jwt token pls see the cookie with jwt token in the header section.",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8080/ISMS/AllAnnouncements",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ISMS",
+						"AllAnnouncements"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
