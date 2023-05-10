@@ -1,0 +1,220 @@
+<----java--->
+
+. src files end with .java and compiled byte codes end with .class extension
+. first public class name and file name should be same i.e. because if we have multiple classes inside a single file ..JVM is designed to meet the bytecode thst mtches the nme of the source file as the entry point.. jvm specifically look for a  main method which is static, which has the public access, with string srrsy sd yhe parameters and does not return any value.
+. each andevery class has its own .class file.
+. variable declaration / uninitialised variable
+int a;
+. variable defination/ initialised
+a=27;
+. static method will only work with static variables
+ex:
+class example{// has class level variables
+static int age=100; // class level variables must be static always and only these variables can be used in static methods
+public static void main(String args[]){ // has local variables
+int a=10;
+System.out.println("vla is "+a);
+}
+}
+. declaring the variable at class level will always has some default value. for int it is 0..etc
+. variable names can start with $,_,myApp..etc except numbers, spaces..etc java keywords cannot be used as variable names.
+. there are 8 primitive datatypes in java
+
+//integer types
+byte aSingleByte = 100; -128 to 127
+short aSmallNumber = 20000; -32,768 to 32,767
+int anInteger = 2147483647; -2147483648 to 2147483647
+long aLargeNumber = 9223372036854775807L; -9223372036854775808 to 9223372036854775807
+
+//decimal types
+double aDouble = 1.79769313; it has very long range and by default compiler will choose this datatype for decimals
+float aFLoat= 3.4020F;
+
+//boolean
+boolean isWeekend = false;
+
+//characters
+char copyrightSymbol = '%';
+
+. smaller datatypes can be implicitly converted/typecasted into larger datatypes; i.e. 
+
+int num1 = 55;
+double num2 = num1;
+
+the above int to double convertion can be done implicitly by compiler, but viceverse cannot be done by compiler.. i.e. double to int
+
+to convert from larger to smaller datatypes we need to tell compiler explicitly about the typecasting
+ex:  
+double num1 = 5.8;
+int num2 = (int) num1;
+but here we will loose the data.. so be carefull while doing the explicit casting
+
+. 6types of operators in java
+- aritmetic operators  +, -, *, %, /
+int divided by int is always integer
+if u wanted to get some decimal value.. try to use any one of the value as decimal value..
+- assignment operator
+- shorthand operators
+- relational operators... >, <, == (checks if the objects are same or not), !=, >=, <=
+- logical operators .. &&, ||, !,  increment and decrement operator ++, -- and post and pre incre/decre
+- bitwise operators
+
+. new keyword will help us to create the object of a class in heap
+//Strings (Strings in java are not the primitive types.. they are the object types)
+
+String name="i am sujith"; stored in string pool.. and if there is variable value already exist in the string pool then it will reuse the variable value that exist in the string pool and point the current value to the existing string value
+String name = new String(" hi bro"); here jvm will create a new variable regard less of presence of variable value in string pool or not
+demostratio example:
+
+class StringDemo{
+public static void main(String args[]){
+String literalString1 = "abc";
+String literalString2 = "abc";
+
+String objectString1 = new String("xyz");
+String objectString2 = new String("xyz");
+
+System.out.println( literalString1 == literalString2); //output: true becuase the value "abc" already exist in the string pool so we are resuing that value and pointing the literalString2 tp the literalString1 location.. if we cahange the value of the literalString2 then it will point to the new location but it will not change the value of the literalString1
+System.out.println( objectString1 == objectString2); //output: false because both objects are diff i.e. they wil have the diff addressess
+}
+}
+
+//String functions
+String name = "sujith"
+int age = 23
+
+String formattedString = String.format("My name is %s .. and my age is %d", name, age); // instead of using the + operator it is better to write in this format
+System.out.println(formattedString);
+int -- %d
+String -- %s
+bool - %b
+char - %c
+float - %f
+
+name.length()
+name.isEmpty()
+name.toUpperCase()
+name.toLowerCase()
+
+String string1=new String("abc");
+String string2=new String("abc");
+
+string1.equals(string2) // true
+string1 == string2 // false.. because reason explained above.. 2 diff objs even we have same value.. it is always preferred to use .equals all the time
+string1.equalsIgnoreCase(string2);
+
+String sentense = " the sky is blue"
+sop(sentense.replace("blue","red")); // this will not replace the original string .. it will just print the replaced string .. to replace the original string we need to do as below
+String updatedSentence = sentense.replace("blue", "red");
+sop(updatedSentense);
+
+sentense.contains("sky") // checks if the sky is present in the sentense or not
+name.substring(0,3)// substring from 0 to 2
+name.substring(1) // from 1 to end of the string
+name.indexOf('u')
+name.indexOf("ujit")
+sentense.indexOf("sky", 1) // index of sky from 1 position
+name.charAt(i)
+
+String lineOfCurrencies = "USD JPY AUD SGD HKD CAD CHF GBP EURO INR"; 
+String[] currencies = lineOfCurrencies.split(" ");
+System.out.println("output string: " + Arrays.toString(currencies));
+
+Objects of string are immutable. so string method does not have Reverse() method
+
+// user inputs
+
+import java.util.Scanner;
+Scanner sc = new Scanner(System.in); // system.in is used to take the input from user via console/terminal
+String userName = sc.nextLine();
+String userAge = sc.nextInt(); //if u r taking the string input below the nextInt() then pls use sc.nextLine() after sc.nextInt().. because <enter> will be in the buffer of input.. to flust 		 the buffer use nextLine();
+sc.nextLine(); //cleans the input buffer..
+String userLangugae = sc.nextLine();
+
+if we open a object pls make sure that u have also closed the object.
+Ex: Scanner sc=new Scanner(System.in)
+sc.close() // this will destry the object from memory
+
+System.out.printf("name is %s , age is %d, language is %s", userName, userAge, userLanguage);
+
+// convert from Sring to int, doble
+String value=101;
+String val2=10.21;
+
+sop(Integer.parseInt(value));
+sop(Double.parseDouble(val2));
+
+if(operation.equals("sum")){
+System.out.printf("%f - %f = %f "val1, val2, val1-val2);
+}
+
+// also try the switch case later
+switch(val){
+case "Sum" : sop("add");break;
+case "Sub" : sop("sub");break;
+default: sop("no no");
+}
+
+
+//Arrays
+char vowels[] = new Char[5];
+
+vowels[0] = 'a';
+vowels[1] = 'e';
+vowels[2] = 'i';
+vowels[3] = 'o';
+vowels[4] = 'u';
+
+or
+
+char vowels[]={'a','e','i'.'o','u'};
+
+java.util.Arrays;
+sop(Arrays.toString(vowels)); //output [a,e,i,o,u] to print the array in string format
+
+vowels.length // lenght is a property in terms of arrays and method in terms of string
+
+Arrays.sort(vowels); //sorts the entire array
+sop(Arrays.toString(vowels));
+
+Arrays.sort(vowels,1,4); //sort from index 1 to 3
+sop(Arrays.toString(vowels));
+
+// how to split a string
+// hoe to convert the splitted values to array
+// how to sort arrays
+// how to search in arrays
+
+// search in sorted arrays
+Arrays.binarySearch(vowels, 'o'); // it will rerurn the index but only works on sorted arrays
+Arrays.binarySearch(vowels, 1,4,'o'); //search for the key in the from 1 to 3 indexs
+
+Arrays.fill(vowels,'X'); // fills the array with character x
+Arrays.fill(vowels,1,4,'X') // filles the array with character X from index 1 to 3
+
+int numbers[] = {1,2,3,4,5}
+int copyOfNumbers= Arrays.copyOf(numbers, numbers.length);  if we use int copyOfNumbers[] = numbers then both the array names will point to the same address and same values, so create a 		   complete new copy of the array it is better to use Arrays.copyOf
+Arrays.fill(numbers, 0);
+
+sop(Arrays.toString(numbers)); // [0 0 0 0 0]
+sop(Arrays.toString(copyOfNumbers)); // [1,2,3,4,5]
+
+int copyOfNumbers= Arrays.copyOf(numbers, 2) // the new copyOfNumbers array will only have the size of 2 ex: [1,2] so we can use the second parameter to mention the size
+int copyOfNumbers= Arrays.copyOfRange(numbers, 2,5) // will create a array with 2 to 4 elements
+
+to compare the arrays we need to use
+Arrays.equals(numbers, copyOfNumbers)
+do not use numbers == copyOfNumbers.. it will return false reason is mentioned above in strings section
+
+for(int number: numbers){
+System.out.printf("%d is the number",number);
+}
+
+for(int i=0;i<numebrs.length;i++)
+sop(numbers[i]);
+
+dynamic array can be created with the help of ArrayList
+
+
+
+
